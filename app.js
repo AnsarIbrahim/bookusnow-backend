@@ -1,10 +1,10 @@
 import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import path from 'path';
 import cors from 'cors';
+import multer from 'multer';
 
 import usersRoutes from './routes/usersRoutes.js';
 import eventsRoutes from './routes/eventsRoutes.js';
@@ -19,6 +19,15 @@ const dir = './uploads/images';
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
 }
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + '-' + file.originalname);
+  },
+});
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
@@ -52,7 +61,6 @@ mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
   })
   .then(() => {
     console.log('Connected to MongoDB');

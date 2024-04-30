@@ -21,6 +21,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.0.1",
+    "haversine": "^1.1.1",
     "jsonwebtoken": "^9.0.2",
     "mapbox-gl": "^3.3.0",
     "mongoose": "^8.3.2",

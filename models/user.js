@@ -23,8 +23,9 @@ const UserSchema = new mongoose.Schema({
     minlength: [8, 'Password must be at least 8 characters long'],
     select: false,
   },
-  image: { type: Buffer, required: true },
   role: { type: String, enum: ['admin', 'user'], default: 'user' },
+  events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+  image: { type: Buffer, required: true },
 });
 
 UserSchema.plugin(uniqueValidator, {
@@ -34,7 +35,7 @@ UserSchema.plugin(uniqueValidator, {
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
-  this.password = await bcrypt.hash(this.password, 12);
+  this.password = bcrypt.hash(this.password, 12);
 
   next();
 });

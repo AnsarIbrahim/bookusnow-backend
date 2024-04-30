@@ -4,10 +4,10 @@ import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const jwtKey = process.env.JWT_KEY;
+import HttpError from '../models/http-error.js';
+import User from '../models/user.js';
 
-const HttpError = require('../models/http-error');
-const User = require('../models/user');
+const jwtKey = process.env.JWT_KEY;
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -20,6 +20,21 @@ const getUsers = async (req, res, next) => {
   }
 
   res.json({ users: users.map((user) => user.toObject({ getters: true })) });
+};
+
+const getAdmins = async (req, res, next) => {
+  let admins;
+  try {
+    admins = await User.find({ role: 'admin' }, '-password');
+  } catch (error) {
+    return next(
+      new HttpError('Fetching admins failed, please try again later.', 500)
+    );
+  }
+
+  res.json({
+    admins: admins.map((admin) => admin.toObject({ getters: true })),
+  });
 };
 
 const signup = async (req, res, next) => {
@@ -65,8 +80,8 @@ const signup = async (req, res, next) => {
     username,
     email,
     password: hashedPassword,
-    image: imageBuffer,
     role,
+    image: imageBuffer,
   });
 
   try {
@@ -90,9 +105,11 @@ const signup = async (req, res, next) => {
     );
   }
 
-  res
-    .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token: token });
+  res.status(201).json({
+    userId: createdUser.id,
+    email: createdUser.email,
+    token: token,
+  });
 };
 
 const login = async (req, res, next) => {
@@ -100,7 +117,7 @@ const login = async (req, res, next) => {
 
   let existingUser;
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email: email }, '+password');
   } catch (error) {
     return next(
       new HttpError('Logging in failed, please try again later.', 500)
@@ -119,10 +136,7 @@ const login = async (req, res, next) => {
     isValidPassword = await bcrypt.compare(password, existingUser.password);
   } catch (error) {
     return next(
-      new HttpError(
-        'Could not log you in, please check your credentials and try again.',
-        500
-      )
+      new HttpError('Could not log you in, please check your credentials.', 500)
     );
   }
 
@@ -153,6 +167,4 @@ const login = async (req, res, next) => {
   });
 };
 
-exports.getUsers = getUsers;
-exports.signup = signup;
-exports.login = login;
+export { getUsers, getAdmins, signup, login };

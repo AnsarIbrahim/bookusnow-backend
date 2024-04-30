@@ -1,12 +1,19 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import userControllers from '../controllers/usersControllers';
-import fileUpload from '../middleware/file-upload';
+import {
+  getUsers,
+  getAdmins,
+  signup,
+  login,
+} from '../controllers/usersControllers.js';
+import fileUpload from '../middleware/file-upload.js';
 
 const router = Router();
 
-router.get('/', userControllers.getUsers);
+router.get('/', getUsers);
+
+router.get('/admins', getAdmins);
 
 router.post(
   '/signup',
@@ -17,9 +24,9 @@ router.post(
     check('password').isLength({ min: 6 }),
     check('role').not().isEmpty(),
   ],
-  userControllers.signup
+  signup
 );
 
-router.post('login', userControllers.login);
+router.post('/login', login);
 
 export default router;

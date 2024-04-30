@@ -1,5 +1,8 @@
 
-![ansarlogo](https://github.com/AnsarIbrahim/bookusnow-backend/assets/117971223/f6b4f5a9-498b-442d-bbd1-6baf0c0d5069)
+<div align="center">
+    <img src="https://github.com/AnsarIbrahim/bookusnow-backend/assets/117971223/f0977190-7db5-42ca-99df-82f582b2be6e" width="140">
+</div>
+
 
 <a name="readme-top"></a>
 

@@ -1,6 +1,6 @@
 
 <div align="center">
-    <img src="https://github.com/AnsarIbrahim/bookusnow-backend/assets/117971223/f0977190-7db5-42ca-99df-82f582b2be6e" width="140">
+    <img src="https://github.com/AnsarIbrahim/bookusnow-backend/assets/117971223/f0977190-7db5-42ca-99df-82f582b2be6e" width="140" style="border-radius: 50px">
 </div>
 
 

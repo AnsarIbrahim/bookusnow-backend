@@ -36,7 +36,7 @@
 
 ## API
 
-> - [Base Url]()
+> - [Base Url](https://bookusnow-db016831f8aa.herokuapp.com/)
 
 > - API Endpoints
 
@@ -47,7 +47,7 @@
 
 ## Link to Front End
 
-> - [Live Link](https://bookusnow-db016831f8aa.herokuapp.com/)
+> - [Live Link](https://bookusnowapp.netlify.app/)
 
 > - [Link to Front-end Repository](https://github.com/AnsarIbrahim/bookusnow-frontend)
 
@@ -89,7 +89,7 @@ The key features of this project include.
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> - To get a local copy up and running, follow these steps.
+> - Follow these steps to get a local copy up and running.
 
 ### Prerequisites
 

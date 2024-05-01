@@ -32,7 +32,7 @@
 
 # 👨‍💻 BookusNow <a name="about-project"></a>
 
-**BookusNow** Backend: Node.js server for fetching events, enabling user authentication &amp; powering the BookusNow website. Built with Express.js.
+**BookusNow** is a backend system built using Node.js, Express, MongoDB, and Mongoose. It serves as the backbone for a booking application, providing essential functionalities such as user authentication, file uploading, location services, and weather updates.
 
 ## API
 

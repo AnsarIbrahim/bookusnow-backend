@@ -3,8 +3,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import path from 'path';
+import { dirname } from 'path';
 import cors from 'cors';
 import multer from 'multer';
+import { fileURLToPath } from 'url';
 
 import usersRoutes from './routes/usersRoutes.js';
 import eventsRoutes from './routes/eventsRoutes.js';
@@ -13,6 +15,19 @@ import HttpError from './models/http-error.js';
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const setupStaticFileServer = (app, route, directory) => {
+  app.use(route, express.static(path.join(__dirname, ...directory)));
+};
+
+setupStaticFileServer(app, '/uploads/events', ['uploads', 'events']);
+setupStaticFileServer(app, '/uploads/upcomingEvents', [
+  'uploads',
+  'upcomingEvents',
+]);
 
 const dir = './uploads/images';
 

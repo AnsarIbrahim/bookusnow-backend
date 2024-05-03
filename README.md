@@ -198,7 +198,7 @@ npm start
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-> - We would like to thank [NovaNectar Services Pvt. Ltd.](https://www.novanectar.co.in/)
+> - I would like to thank [NovaNectar Services Pvt. Ltd.](https://www.novanectar.co.in/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
